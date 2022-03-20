@@ -21,6 +21,8 @@ import com.lmax.disruptor.util.Util;
 
 /**
  * Hides a group of Sequences behind a single Sequence
+ * FixedSequenceGroup相当于包含了若干序列的一个包装类
+ * 继承了Sequence，只重写了get方法，获取内部序列组中最小的序列值，其它的"写"方法都不支持。
  */
 public final class FixedSequenceGroup extends Sequence
 {

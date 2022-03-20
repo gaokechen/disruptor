@@ -20,6 +20,8 @@ package com.lmax.disruptor;
  * that represents their current cursor value.  Used during dynamic
  * add/remove of Sequences from a
  * {@link SequenceGroups#addSequences(Object, java.util.concurrent.atomic.AtomicReferenceFieldUpdater, Cursored, Sequence...)}.
+ *
+ * 提供了一个获取当前序列值(游标)的方法
  */
 public interface Cursored
 {
