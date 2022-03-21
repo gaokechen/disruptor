@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.lmax.disruptor.EventSequencer</OriginalElement>
+  <nodes>
+    <node x="0.0" y="0.0">com.lmax.disruptor.Sequenced</node>
+    <node x="146.5" y="282.0">com.lmax.disruptor.EventSequencer</node>
+    <node x="281.0" y="88.5">com.lmax.disruptor.DataProvider</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.lmax.disruptor.EventSequencer" target="com.lmax.disruptor.DataProvider" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="252.0" y="257.0" />
+      <point x="373.5" y="257.0" />
+      <point x="0.0" y="27.5" />
+    </edge>
+    <edge source="com.lmax.disruptor.EventSequencer" target="com.lmax.disruptor.Sequenced" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="252.0" y="257.0" />
+      <point x="130.5" y="257.0" />
+      <point x="0.0" y="116.0" />
+    </edge>
+  </edges>
+  <settings layout="分层" zoom="1.0" showDependencies="false" x="233.0" y="156.0" />
+  <SelectedNodes>
+    <node>com.lmax.disruptor.EventSequencer</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>字段</Category>
+    <Category>属性</Category>
+    <Category>方法</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
