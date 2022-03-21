@@ -40,6 +40,10 @@ public final class MultiProducerSequencer extends AbstractSequencer
 
     // availableBuffer tracks the state of each ringbuffer slot
     // see below for more details on the approach
+    /**
+     * MultiProducerSequencer内部多了一个availableBuffer，是一个int型的数组，size大小和RingBuffer的Size一样大，用来追踪Ringbuffer每个槽的状态
+     * 构造MultiProducerSequencer的时候会进行初始化，availableBuffer数组中的每个元素会被初始化成-1
+     */
     private final int[] availableBuffer;
     private final int indexMask;
     private final int indexShift;
@@ -60,6 +64,7 @@ public final class MultiProducerSequencer extends AbstractSequencer
     }
 
     /**
+     *  逻辑和SingleProducerSequencer内部一样，区别是这里使用了cursor.get()，里面获取的是一个volatile的value值。
      * @see Sequencer#hasAvailableCapacity(int)
      */
     @Override
@@ -106,6 +111,7 @@ public final class MultiProducerSequencer extends AbstractSequencer
     }
 
     /**
+     * 逻辑和SingleProducerSequencer内部一样，区别是增加当前序列值是原子操作
      * @see Sequencer#next(int)
      */
     @Override
@@ -209,6 +215,7 @@ public final class MultiProducerSequencer extends AbstractSequencer
     }
 
     /**
+     * 方法中会将当前序列值的可用状态记录到availableBuffer里面，而记录的这个值其实就是sequence除以bufferSize，也就是当前sequence绕buffer的圈数。
      * @see Sequencer#publish(long)
      */
     @Override

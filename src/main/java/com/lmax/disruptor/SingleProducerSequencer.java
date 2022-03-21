@@ -49,6 +49,8 @@ abstract class SingleProducerSequencerFields extends SingleProducerSequencerPad
  *
  * <p>* Note on {@link Sequencer#getCursor()}:  With this sequencer the cursor value is updated after the call
  * to {@link Sequencer#publish(long)} is made.</p>
+ *
+ * 缓存行填充，真正使用的值是nextValue和cachedValue
  */
 
 public final class SingleProducerSequencer extends SingleProducerSequencerFields
@@ -75,6 +77,14 @@ public final class SingleProducerSequencer extends SingleProducerSequencerFields
         return hasAvailableCapacity(requiredCapacity, false);
     }
 
+    /**
+     * 当前序列的nextValue + requiredCapacity是事件发布者要申请的序列值
+     * 当前序列的cachedValue记录的是之前事件处理者申请的序列值
+     *
+     * @param requiredCapacity
+     * @param doStore
+     * @return
+     */
     private boolean hasAvailableCapacity(int requiredCapacity, boolean doStore)
     {
         long nextValue = this.nextValue;
@@ -111,6 +121,7 @@ public final class SingleProducerSequencer extends SingleProducerSequencerFields
     }
 
     /**
+     * 真正申请序列的方法，里面的逻辑和hasAvailableCapacity一样，只是在不能申请序列的时候会阻塞等待一下，然后重试。
      * @see Sequencer#next(int)
      */
     @Override
@@ -155,6 +166,7 @@ public final class SingleProducerSequencer extends SingleProducerSequencerFields
     }
 
     /**
+     * tryNext方法是next方法的非阻塞版本，不能申请就抛异常
      * @see Sequencer#tryNext(int)
      */
     @Override
@@ -176,6 +188,7 @@ public final class SingleProducerSequencer extends SingleProducerSequencerFields
     }
 
     /**
+     * 环形队列的容量减去事件发布者与事件处理者的序列差
      * @see Sequencer#remainingCapacity()
      */
     @Override
@@ -189,6 +202,7 @@ public final class SingleProducerSequencer extends SingleProducerSequencerFields
     }
 
     /**
+     * 声明一个序列，在初始化时使用
      * @see Sequencer#claim(long)
      */
     @Override
@@ -198,6 +212,7 @@ public final class SingleProducerSequencer extends SingleProducerSequencerFields
     }
 
     /**
+     * 发布一个序列，会先设置内部游标值，然后唤醒等待的事件处理者
      * @see Sequencer#publish(long)
      */
     @Override

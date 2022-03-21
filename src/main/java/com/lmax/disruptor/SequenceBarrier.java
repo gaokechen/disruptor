@@ -24,6 +24,7 @@ public interface SequenceBarrier
 {
     /**
      * Wait for the given sequence to be available for consumption.
+     * 等待序列变为可用，然后消费这个序列
      *
      * @param sequence to wait for
      * @return the sequence up to which is available
@@ -35,6 +36,7 @@ public interface SequenceBarrier
 
     /**
      * Get the current cursor value that can be read.
+     * 获取当前可以读取的游标值
      *
      * @return value of the cursor for entries that have been published.
      */
@@ -42,6 +44,7 @@ public interface SequenceBarrier
 
     /**
      * The current alert status for the barrier.
+     * 当前屏障状态是否发过通知
      *
      * @return true if in alert otherwise false.
      */
@@ -49,16 +52,19 @@ public interface SequenceBarrier
 
     /**
      * Alert the {@link EventProcessor}s of a status change and stay in this status until cleared.
+     * 通知EventProcessor状态变化，并且停留在这个状态上直到状态被清除
      */
     void alert();
 
     /**
      * Clear the current alert status.
+     * 清除当前通知状态
      */
     void clearAlert();
 
     /**
      * Check if an alert has been raised and throw an {@link AlertException} if it has.
+     * 检查是否已经发出通知，已经通知抛AlertException异常
      *
      * @throws AlertException if alert has been raised.
      */

@@ -1,5 +1,9 @@
 package com.lmax.disruptor;
 
+/**
+ * EventSink主要是提供发布事件(就是往队列上放数据)的功能，接口上定义了各种发布事件的方法。
+ * @param <E>
+ */
 public interface EventSink<E>
 {
     /**

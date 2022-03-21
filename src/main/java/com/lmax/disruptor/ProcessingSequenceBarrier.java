@@ -51,15 +51,19 @@ final class ProcessingSequenceBarrier implements SequenceBarrier
     public long waitFor(final long sequence)
         throws AlertException, InterruptedException, TimeoutException
     {
+        // 检查通知状态
         checkAlert();
 
+        // 根据等待策略来等待可用的序列值
         long availableSequence = waitStrategy.waitFor(sequence, cursorSequence, dependentSequence, this);
 
+        // 如果可用序列值小于sequence，那么直接返回
         if (availableSequence < sequence)
         {
             return availableSequence;
         }
 
+        // 返回可以安全使用的最大序列值
         return sequencer.getHighestPublishedSequence(sequence, availableSequence);
     }
 

@@ -26,6 +26,10 @@ abstract class RingBufferPad
     protected long p1, p2, p3, p4, p5, p6, p7;
 }
 
+/**
+ * RingBuffer的内部结构明确了：内部用数组来实现，同时有保存数组长度的域bufferSize和下标掩码indexMask，还有一个sequencer。
+ * @param <E>
+ */
 abstract class RingBufferFields<E> extends RingBufferPad
 {
     private static final int BUFFER_PAD;

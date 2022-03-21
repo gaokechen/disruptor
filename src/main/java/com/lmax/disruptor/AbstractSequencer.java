@@ -24,6 +24,7 @@ import com.lmax.disruptor.util.Util;
  * Base class for the various sequencer types (single/multi).  Provides
  * common functionality like the management of gating sequences (add/remove) and
  * ownership of the current cursor.
+ * sequencer类型的基类，提供通用功能如管理控制序列和关联当前游标
  */
 public abstract class AbstractSequencer implements Sequencer
 {
@@ -37,6 +38,7 @@ public abstract class AbstractSequencer implements Sequencer
 
     /**
      * Create with the specified buffer size and wait strategy.
+     * 使用指定的缓冲区大小和等待策略创建。
      *
      * @param bufferSize   The total number of entries, must be a positive power of 2.
      * @param waitStrategy The wait strategy used by this sequencer

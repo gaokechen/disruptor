@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.lmax.disruptor.MultiProducerSequencer</OriginalElement>
+  <nodes>
+    <node x="77.75" y="80.0">com.lmax.disruptor.Sequencer</node>
+    <node x="22.75" y="240.0">com.lmax.disruptor.MultiProducerSequencer</node>
+    <node x="0.0" y="0.0">com.lmax.disruptor.Sequenced</node>
+    <node x="44.25" y="160.0">com.lmax.disruptor.AbstractSequencer</node>
+    <node x="160.0" y="0.0">com.lmax.disruptor.Cursored</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.lmax.disruptor.AbstractSequencer" target="com.lmax.disruptor.Sequencer" relationship="REALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.lmax.disruptor.Sequencer" target="com.lmax.disruptor.Sequenced" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="146.25" y="55.0" />
+      <point x="70.0" y="55.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.lmax.disruptor.MultiProducerSequencer" target="com.lmax.disruptor.AbstractSequencer" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.lmax.disruptor.Sequencer" target="com.lmax.disruptor.Cursored" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="146.25" y="55.0" />
+      <point x="222.5" y="55.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="分层" zoom="1.0" showDependencies="false" x="142.5" y="135.0" />
+  <SelectedNodes>
+    <node>com.lmax.disruptor.MultiProducerSequencer</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

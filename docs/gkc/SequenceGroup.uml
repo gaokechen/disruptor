@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.lmax.disruptor.SequenceGroup</OriginalElement>
+  <nodes>
+    <node x="0.0" y="751.0">com.lmax.disruptor.SequenceGroup</node>
+    <node x="196.5" y="579.0">com.lmax.disruptor.Sequence</node>
+    <node x="213.0" y="342.0">com.lmax.disruptor.RhsPadding</node>
+    <node x="229.5" y="237.0">com.lmax.disruptor.Value</node>
+    <node x="213.5" y="0.0">com.lmax.disruptor.LhsPadding</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.lmax.disruptor.Sequence" target="com.lmax.disruptor.RhsPadding" relationship="GENERALIZATION">
+      <point x="0.0" y="-61.0" />
+      <point x="0.0" y="93.5" />
+    </edge>
+    <edge source="com.lmax.disruptor.SequenceGroup" target="com.lmax.disruptor.Sequence" relationship="GENERALIZATION">
+      <point x="0.0" y="-38.5" />
+      <point x="0.0" y="61.0" />
+    </edge>
+    <edge source="com.lmax.disruptor.RhsPadding" target="com.lmax.disruptor.Value" relationship="GENERALIZATION">
+      <point x="0.0" y="-93.5" />
+      <point x="0.0" y="27.5" />
+    </edge>
+    <edge source="com.lmax.disruptor.Value" target="com.lmax.disruptor.LhsPadding" relationship="GENERALIZATION">
+      <point x="0.0" y="-27.5" />
+      <point x="0.0" y="93.5" />
+    </edge>
+  </edges>
+  <settings layout="分层" zoom="1.0" showDependencies="false" x="285.5" y="414.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>字段</Category>
+    <Category>属性</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
