@@ -39,6 +39,10 @@ abstract class RingBufferFields<E> extends RingBufferPad
 
     static
     {
+        /**
+         * 返回数组中一个元素占用的大小
+         * @see Unsafe#arrayIndexScale(java.lang.Class)
+         */
         final int scale = UNSAFE.arrayIndexScale(Object[].class);
         if (4 == scale)
         {
@@ -54,6 +58,10 @@ abstract class RingBufferFields<E> extends RingBufferPad
         }
         BUFFER_PAD = 128 / scale;
         // Including the buffer pad in the array base offset
+        /**
+         * 返回数组中第一个元素的偏移地址
+         * @see Unsafe#arrayBaseOffset(java.lang.Class)
+         */
         REF_ARRAY_BASE = UNSAFE.arrayBaseOffset(Object[].class) + (BUFFER_PAD << REF_ELEMENT_SHIFT);
     }
 
