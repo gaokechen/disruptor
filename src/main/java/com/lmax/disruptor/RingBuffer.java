@@ -102,6 +102,10 @@ abstract class RingBufferFields<E> extends RingBufferPad
     @SuppressWarnings("unchecked")
     protected final E elementAt(long sequence)
     {
+        /**
+         * 获得给定对象的指定地址偏移量的值，与此类似操作还有：getInt，getDouble，getLong，getChar等
+         * @see sun.misc.Unsafe#getObject(java.lang.Object, long)
+         */
         return (E) UNSAFE.getObject(entries, REF_ARRAY_BASE + ((sequence & indexMask) << REF_ELEMENT_SHIFT));
     }
 }
@@ -205,6 +209,7 @@ public final class RingBuffer<E> extends RingBufferFields<E> implements Cursored
 
     /**
      * Create a new Ring Buffer with the specified producer type (SINGLE or MULTI)
+     * RingBuffer提供了静态工厂方法对单事件/多事件发布者进行RingBuffer实例创建。
      *
      * @param <E> Class of the event stored in the ring buffer.
      * @param producerType producer type to use {@link ProducerType}.
@@ -234,6 +239,7 @@ public final class RingBuffer<E> extends RingBufferFields<E> implements Cursored
     /**
      * <p>Get the event for a given sequence in the RingBuffer.</p>
      *
+     * 事件发布者和事件处理者申请到序列后，都会通过这个方法从序列上获取事件槽来生产或者发布事件。
      * <p>This call has 2 uses.  Firstly use this call when publishing to a ring buffer.
      * After calling {@link RingBuffer#next()} use this call to get hold of the
      * preallocated event to fill with data before calling {@link RingBuffer#publish(long)}.</p>
