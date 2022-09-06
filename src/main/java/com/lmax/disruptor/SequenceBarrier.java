@@ -19,6 +19,9 @@ package com.lmax.disruptor;
 /**
  * Coordination barrier for tracking the cursor for publishers and sequence of
  * dependent {@link EventProcessor}s for processing a data structure
+ *
+ * 用于跟踪发布者的光标 和 用于处理数据结构的 依赖 {@link EventProcessor} 序列的协调屏障
+ *
  */
 public interface SequenceBarrier
 {

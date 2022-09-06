@@ -18,6 +18,8 @@ package com.lmax.disruptor;
 /**
  * Callback interface to be implemented for processing units of work as they become available in the {@link RingBuffer}.
  *
+ * 当工作单元在 {@link RingBuffer} 中可用时，为处理工作单元实现回调接口。
+ *
  * @param <T> event implementation storing the data for sharing during exchange or parallel coordination of an event.
  * @see WorkerPool
  */

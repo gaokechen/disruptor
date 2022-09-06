@@ -18,6 +18,7 @@ package com.lmax.disruptor;
 
 /**
  * Strategy employed for making {@link EventProcessor}s wait on a cursor {@link Sequence}.
+ * 用于使 {@link EventProcessor} 等待游标 {@link Sequence} 的策略
  */
 public interface WaitStrategy
 {
@@ -43,6 +44,7 @@ public interface WaitStrategy
 
     /**
      * Implementations should signal the waiting {@link EventProcessor}s that the cursor has advanced.
+     * 实现应该向等待的 {@link EventProcessor} 发出游标已经前进的信号。
      */
     void signalAllWhenBlocking();
 }

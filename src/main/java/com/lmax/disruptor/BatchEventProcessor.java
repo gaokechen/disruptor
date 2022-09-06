@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <p>
  * If the {@link EventHandler} also implements {@link LifecycleAware} it will be notified just after the thread
  * is started and just before the thread is shutdown.
+ * 批量事件处理器
  *
  * @param <T> event implementation storing the data for sharing during exchange or parallel coordination of an event.
  */
@@ -113,6 +114,7 @@ public final class BatchEventProcessor<T>
     @Override
     public void run()
     {
+        // 线程是否运行
         if (!running.compareAndSet(IDLE, RUNNING))
         {
             if (running.get() == RUNNING)
@@ -120,8 +122,10 @@ public final class BatchEventProcessor<T>
                 throw new IllegalStateException("Thread is already running");
             }
         }
+        // 将ProcessingSequenceBarrier的alerted设置为false
         sequenceBarrier.clearAlert();
 
+        // start事件处理
         notifyStart();
 
         try
@@ -132,29 +136,38 @@ public final class BatchEventProcessor<T>
             }
 
             T event = null;
+            // 获取当前事件处理器的下一个sequence
             long nextSequence = sequence.get() + 1L;
 
             while (true)
             {
                 try
                 {
+                    /**
+                     * 从 ProcessingSequenceBarrier 获取可用的 availableSequence
+                     * 获取 RingBuffer 最大可访问的 availableSequence 序号
+                     */
                     final long availableSequence = sequenceBarrier.waitFor(nextSequence);
                     if (batchStartAware != null)
                     {
                         batchStartAware.onBatchStart(availableSequence - nextSequence + 1);
                     }
 
+                    // nextSequence 比可用的 availableSequence 小的时候，获取事件并触发事件处理
                     while (nextSequence <= availableSequence)
                     {
                         event = dataProvider.get(nextSequence);
+                        // 消费者事件处理
                         eventHandler.onEvent(event, nextSequence, nextSequence == availableSequence);
                         nextSequence++;
                     }
 
+                    // 设置当前事件处理器已经处理的 sequence
                     sequence.set(availableSequence);
                 }
                 catch (final TimeoutException e)
                 {
+                    // 超时处理
                     notifyTimeout(sequence.get());
                 }
                 catch (final AlertException ex)
@@ -166,6 +179,7 @@ public final class BatchEventProcessor<T>
                 }
                 catch (final Throwable ex)
                 {
+                    // 异常事件处理
                     exceptionHandler.handleEventException(ex, nextSequence, event);
                     sequence.set(nextSequence);
                     nextSequence++;
@@ -174,6 +188,7 @@ public final class BatchEventProcessor<T>
         }
         finally
         {
+            // 关闭事件处理
             notifyShutdown();
             running.set(IDLE);
         }
@@ -214,6 +229,7 @@ public final class BatchEventProcessor<T>
 
     /**
      * Notifies the EventHandler immediately prior to this processor shutting down
+     * 在此处理器关闭之前立即通知 EventHandler
      */
     private void notifyShutdown()
     {

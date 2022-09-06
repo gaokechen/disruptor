@@ -469,6 +469,10 @@ public final class RingBuffer<E> extends RingBufferFields<E> implements Cursored
 
 
     /**
+     * 发布事件分为三步：
+     * 1.申请序列
+     * 2.填充事件
+     * 3.提交序列
      * @see com.lmax.disruptor.EventSink#publishEvent(com.lmax.disruptor.EventTranslator)
      */
     @Override
